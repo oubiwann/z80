@@ -6,35 +6,45 @@
 # -DMEM_BREAK		support memory-mapped I/O and breakpoints,
 #				which will noticably slow down emulation
 
+BIN ?= ./bin
+SRC = ./src
+MAC = ./mac
+DRIVES = ./drives
+UTILS = ./utils
 CC = gcc
-CFLAGS = -O2 -pipe -DPOSIX_TTY -DLITTLE_ENDIAN -DMEM_BREAK -ansi -Wunused-result
+CFLAGS = -O2 -pipe -Wall -DPOSIX_TTY -DLITTLE_ENDIAN -DMEM_BREAK -ansi
 LDFLAGS = 
 
-FILES = README Makefile MacProj.hqx z80.proj A-Hdrive.gz	\
-	cpmdisc.h defs.h	\
-	cpm.c bios.c disassem.c main.c z80.c	\
-	bye.mac getunix.mac putunix.mac	\
-	makedisc.c
+FILES = README Makefile $(MAC)/MacProj.hqx z80.proj \
+	$(DRIVES)/A-Hdrive.gz	\
+	$(SRC)/cpmdisc.h $(SRC)/defs.h	\
+	$(SRC)/cpm.c $(SRC)/bios.c $(SRC)/disassem.c $(SRC)/main.c $(SRC)/z80.c	\
+	$(SRC)/makedisc.c \
+	$(UTILS)/bye.mac $(UTILS)/getunix.mac $(UTILS)/putunix.mac
 
-OBJS =	bios.o \
-	disassem.o \
-	main.o \
-	z80.o
+OBJS =	$(SRC)/bios.o \
+	$(SRC)/disassem.o \
+	$(SRC)/main.o \
+	$(SRC)/z80.o
 
-z80: $(OBJS)
-	$(CC) $(CFLAGS) $(LDFLAGS) -o z80 $(OBJS)
+cpm: $(BIN)/cpm
 
-cpm:
-	rm -f cpm
-	ln -s z80 cpm
+z80: $(BIN)/z80
 
-bios.o:		bios.c defs.h cpmdisc.h cpm.c
-z80.o:		z80.c defs.h
-disassem.o:	disassem.c defs.h
-main.o:		main.c defs.h
+$(BIN)/z80: $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $(BIN)/z80 $(OBJS)
+
+$(BIN)/cpm: $(BIN)/z80
+	rm -f $(BIN)/cpm
+	ln -s z80 $(BIN)/cpm
+
+bios.o:		$(SRC)/bios.c $(SRC)/defs.h $(SRC)/cpmdisc.h $(SRC)/cpm.c
+z80.o:		$(SRC)/z80.c $(SRC)/defs.h
+disassem.o:	$(SRC)/disassem.c $(SRC)/defs.h
+main.o:		$(SRC)/main.c $(SRC)/defs.h
 
 clean:
-	rm -f z80 cpm *.o
+	rm -f $(BIN)/z80 $(BIN)/cpm $(SRC)/*.o
 
 tags:	$(FILES)
 	cxxtags *.[hc]
@@ -47,3 +57,5 @@ files:
 
 difflist:
 	@for f in $(FILES); do rcsdiff -q $$f >/dev/null || echo $$f; done
+
+.PHONY: cpm z80
