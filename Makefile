@@ -7,7 +7,7 @@
 #				which will noticably slow down emulation
 
 CC = gcc
-CFLAGS = -O2 -pipe -Wall -DPOSIX_TTY -DLITTLE_ENDIAN -DMEM_BREAK
+CFLAGS = -O2 -pipe -DPOSIX_TTY -DLITTLE_ENDIAN -DMEM_BREAK -ansi -Wunused-result
 LDFLAGS = 
 
 FILES = README Makefile MacProj.hqx z80.proj A-Hdrive.gz	\
