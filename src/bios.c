@@ -357,7 +357,7 @@ home(z80info *z80)
 static void
 seldisc(z80info *z80)
 {
-	char hdrivebuf[] = "A-Hdrive";
+	char hdrivebuf[] = "drives/A-Hdrive";
 	char drivebuf[] = "A-drive";
 	char *drivestr = C < NUMHDISCS ? hdrivebuf : drivebuf;
 
