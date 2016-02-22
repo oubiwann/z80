@@ -14,7 +14,7 @@ compilation flags are -DLITTLE_ENDIAN and -DPOSIX_TTY as described
 further in the Makefile.  You'll almost certainly have to tweak the
 other make variables, such as CFLAGS and CC.  Then just type "make".
 
-For the Macintosh, the file "MacProj.hqx" is a BinHex SIT archive with
+For the Macintosh, the file "mac/MacProj.hqx" is a BinHex SIT archive with
 three project files for Think C, CodeWarrior 68k, and CW PowerPC.
 
 The file "main.c" contains UNIX routines for character-mode I/O, if
