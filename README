@@ -54,13 +54,13 @@ traditional 8" 256k drives.  The code names the virtual hard-drives as
 confusing one for the other.  Their contents should be identical to the
 real thing, even down to the reserved tracks, assuming I did it right.
 
-There are several "*.mac" files which are Z80 macro-assembly sources for
-getting files from UNIX into CP/M (GETUNIX.MAC), putting files out from
-CP/M to UNIX (PUTUNIX.MAC), and quitting the emulator (BYE.MAC).  All
-these files are also in "A-Hdrive", all assembled and ready to run.
-They do little useful error checking, but it should be pretty obvious
-from the code how they work.  Any text files transfered into CP/M must
-have CR-LF as the line separator or it gets awfully confused.
+There are several "utils/*.mac" files which are Z80 macro-assembly sources for
+getting files from UNIX into CP/M (GETUNIX.MAC), putting files out from CP/M to
+UNIX (PUTUNIX.MAC), and quitting the emulator (BYE.MAC).  All these files are
+also in "A-Hdrive", all assembled and ready to run.  They do little useful
+error checking, but it should be pretty obvious from the code how they work.
+Any text files transfered into CP/M must have CR-LF as the line separator or it
+gets awfully confused.
 
 Usage:
 	PUTUNIX <CP/M-file> <unixfile>
